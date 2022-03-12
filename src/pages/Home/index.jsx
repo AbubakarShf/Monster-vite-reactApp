@@ -28,6 +28,7 @@ const Home = () => {
   if (loading) {
     return (
       <div className="app">
+      <h1>MONSTER</h1>
      <SearchBox placeHolder="search monster" handleChange={(e)=>setSearchInput(e.target.value)}/>
       <CardList monster={filteredMonster}/>
       </div>
