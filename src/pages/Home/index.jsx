@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react"
 import CardList from "../../components/CardList"
-
+import SearchBox from "../../components/SearchBox"
 const API = "https://jsonplaceholder.typicode.com/users"
 
 const Home = () => {
   const [monster, setMonster] = useState([])
   const [loading, setLoading] = useState(false)
+  const [searchInput, setSearchInput] = useState("")
 
   const fetchData = async () => {
     try {
@@ -19,13 +20,17 @@ const Home = () => {
     }
   }
 
+  const filteredMonster=monster.filter(mnst=>mnst.name.toLowerCase().includes(searchInput.toLowerCase()))
   useEffect(() => {
     fetchData()
   }, [])
 
   if (loading) {
     return (
-      <CardList monster={monster}/>
+      <div className="app">
+     <SearchBox placeHolder="search monster" handleChange={(e)=>setSearchInput(e.target.value)}/>
+      <CardList monster={filteredMonster}/>
+      </div>
     )
   }
   if(!loading){
